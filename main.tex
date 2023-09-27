@@ -1,0 +1,141 @@
+\documentclass{article}
+\input{imports.tex}
+\input{config.tex}
+
+\begin{document}
+\titulo{Resumen Control 1}
+
+\begin{multicols}{2}
+\setcounter{section}{-1}
+\section{Preliminares}
+\definicion{Limsup y liminf de conjuntos}{
+Sea $\{A_n\}_{n \in \N}$ colección de conjuntos. Definimos:
+\begin{itemize}
+    \item $\limsup_n A_n = \bigcap_{n \in N} \bigcup_{m \geq n} A_n$ (\textit{$A_n$ ocurre infinitas veces})
+    \item $\liminf_n A_n = \bigcup_{n \in N} \bigcap_{m \geq n} A_n$ (\textit{$A_n$ ocurre eventualmente})
+\end{itemize}}
+
+\lema{Borel-Cantelli}{Sea $\{A_n\}_{n \in \N}$ colección de eventos del espacio de probabilidad $(\Omega, \F, \P)$. Entonces
+\begin{itemize}
+    \item \textbf{(convergente)}
+    \[\sum_{n \in \N} \P(A_n) < \infty \implies \P(\limsup_n A_n) = 0\]
+    \item \textbf{(divergente)} Si además los $\{A_n\}_n$ son independientes:
+    \[\sum_{n \in \N} \P(A_n) = \infty \implies \P(\limsup_n A_n) = 1\]
+\end{itemize}
+}
+
+\definicion{Vector Gaussiano}{
+Un vector aleatorio $X$ sobre $\R^n$ se dice gaussiano si para todo $u \in \R^n$, $u^tX$ tiene distribución normal.
+}
+
+\definicion{Proceso Gaussiano}{Un proceso $(X_t)_t$ se dice gaussiano si para todo $n \in \N$ y $t_1 < t_2 < \dots < t_n$, el vector $(X_{t_1}, \dots, X_{t_n})$ es un vector gaussiano en $\R^n$.}
+
+\proposicion{Caracterización de Independencia}{Sean $X, Y$ vectores o bien procesos gaussianos centrados. Entonces, se tiene que $X \ind Y$ si y solo si:
+\[\forall u, v : \E[u^t X \cdot v^t Y] = 0\]
+En que los $u, v$ se interpretan en $\R^n$, o de cualquier tamaño finito dependiendo del caso.}
+
+\teorema{Radon-Nikodym}{Si $\mu, \lambda$ son medidas finitas en $(S, \Sigma)$ un espacio medible tales que
+\[\forall F \in \Sigma : \mu(F) = 0 \implies \lambda(F) = 0\]
+(condición que se define como absoluta continuidad: $\lambda \ll \mu$), entonces existe $f$ medible no-negativa tal que $\lambda(A) = \int_A f \dd{\mu}$ para todo $A \in \Sigma$. Llamamos a $f$ la derivada de Radon-Nikodym de $\lambda$ con respecto a $\mu$ y denotamos
+\[f =: \dv{\lambda}{\mu}\]}
+
+\section{Construcción de Lévy del MB}
+
+\definicion{Movimiento Browniano}{Decimos que una función continua aleatoria $B: \R^+ \to \R$ es un movimiento browniano estándar si
+\begin{enumerate}
+    \item $B_t \sim \mathcal{N}(0, t)$
+    \item $B_{t+h} - B_t \overset{\L}{=} B_h$ y es independiente de $\sigma( B_s : s \leq t)$
+    \item $B_0 = 0$
+\end{enumerate}
+    
+}
+
+\proposicion{Propiedades del MB}{
+\begin{enumerate}
+    \item \textbf{(Correlaciones)} $\E[B_t B_s] = t \wedge s$
+    \item \textbf{(Reescalado)} $\forall \alpha \neq 0 \in \R : (B_t)_t \overset{\L}{=} (a^{-1} B_{a^2t})$
+    \item \textbf{(Inversiones temporales)}
+    \begin{enumerate}
+        \item $(B_t)_{t \in [0, 1]} \overset{\L}{=} (B_{1 - t} - B_1)_{t \in [0, 1]}$
+        \item $(B_t)_{t \geq 0} \overset{\L}{=} (tB_{1/t} \mathbf{1}_{t \neq 0})_{t \geq 0}$
+    \end{enumerate}
+\end{enumerate}
+\textbf{Nota:} Un proceso gaussiano $(W_t)_t$ con $W_0 = 0$ y que cumple 1. es un MB.
+}
+
+\definicion{Conjuntos Diádicos}{Definimos los siguientes subconjuntos de $[0,1]$
+\begin{align*}
+    D_n &:= \qty{\frac{k}{2^n} : k \in \{0, \dots, 2^n\}}\\
+    D &= \bigcup_{n \in \N} D_n
+\end{align*}}
+\definicion{Construcción de Lévy}{
+Dada $(X_t)_{t \in D}$ familia de $\mathcal{N}(0, 1)$ independientes:
+\begin{itemize}
+    \item \textbf{(Construcción en los diádicos)} Construímos $B_0 = 0$, $B_1 = X_1$ y para $n \geq 1, d \in D_n \setminus D_{n-1}$
+    \[B_d = \frac{B_{d + 2^{-n}} + B_{d - 2^{-n}}}{2} + 2^{- \frac{n+1}{2}}X_d\]
+
+    \item \textbf{(Construcción en $[0, 1]$)} Definimos $F_0(t) = X_1 \cdot t$ y
+    \[F_n(t) = \begin{cases}
+        2^{-\frac{n+1}{2}} x_t, & t \in D_n \setminus D_{n-1} \\
+        0, & t \in D_{n-1}\\
+        \text{lineal entre los valores}. &
+    \end{cases}\]
+    Así, $B_t = \sum_{k \geq 0} F_k(t)$ coincide con la construcción en $D$ y define un MB en $[0, 1]$.
+    \item \textbf{(Construcción en $\R^+$)} Sea $(B^i)_{i \in \N}$ una familia de MBs independientes en $[0, 1]$, entonces
+    \[B_t = B_{t - \floor{t}}^{\floor{t}} + \sum_{i=1}^{\floor{t} - 1} B_1^i\]
+    Define a un MB en $\R^+$
+\end{itemize}
+
+}
+
+\section{Propiedades Trayectoriales del MB}
+
+\definicion{Módulo de continuidad}{Una función $\phi: [0, 1] \to \R^+$ creciente se dice módulo de continuidad de $F: [0, 1] \to \R$ si
+\[\lim_{h \to 0} \sup_{l \in [0, h]} \sup_{t \in [0, 1 - h]} \frac{|F(t + l) - F(t)|}{\phi(l)} = 1\]}
+
+\teorema{Módulo de continuidad del MB}{El módulo de continuidad del MB es casi seguramemnte
+\[\phi(h) = \sqrt{2} \sqrt{h \log(1/h)}\]}
+
+\proposicion{Monotonía y derivabilidad}{c.s. el movimiento browniano no es monótono en ningún intervalo ni derivable en ningún punto}
+
+\proposicion{Ceros del MB}{lal}
+
+\proposicion{Máximos del MB}{lal}
+
+\proposicion{Absoluta continuidad}{lal}
+
+\section{Propiedad de Markov}
+
+\teorema{Propiedad de Markov Débil}{Sea }
+
+\definicion{Filtración}{lal}
+
+\definicion{Filtración casi natural del MB}{lal}
+
+\teorema{Ley 0-1 de Blumenthal}{lal}
+
+\definicion{Filtración natural del MB}{lal}
+
+\definicion{Continuidad a la derecha}{
+
+\textbf{Nota:} La filtración natural del MB es continua a la derecha.
+}
+
+\definicion{Adaptabilidad}{lal}
+
+\definicion{Tiempo de parada}{lal}
+
+\proposicion{Tiempo de llegada a un conjunto}{lal}
+
+\definicion{$\F_\tau$}{lal}
+
+\teorema{Propiedad de Markov Fuerte}{lal}
+
+\teorema{Principio de Reflexión}{lal}
+
+\teorema{Transformada de Lévy}{lal}
+
+\section{Dimensiones Fractales}
+\end{multicols}
+
+\end{document}
