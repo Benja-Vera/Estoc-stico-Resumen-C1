@@ -92,42 +92,55 @@ Dada $(X_t)_{t \in D}$ familia de $\mathcal{N}(0, 1)$ independientes:
 
 \definicion{Módulo de continuidad}{Una función $\phi: [0, 1] \to \R^+$ creciente se dice módulo de continuidad de $F: [0, 1] \to \R$ si
 \[\lim_{h \to 0} \sup_{l \in [0, h]} \sup_{t \in [0, 1 - h]} \frac{|F(t + l) - F(t)|}{\phi(l)} = 1\]}
-
 \teorema{Módulo de continuidad del MB}{El módulo de continuidad del MB es casi seguramemnte
 \[\phi(h) = \sqrt{2} \sqrt{h \log(1/h)}\]}
-
 \proposicion{Monotonía y derivabilidad}{c.s. el movimiento browniano no es monótono en ningún intervalo ni derivable en ningún punto}
 
 \proposicion{Ceros del MB}{lal}
 
 \proposicion{Máximos del MB}{lal}
 
-\proposicion{Absoluta continuidad}{lal}
+\proposicion{Absoluta continuidad}{
+Sea $\P$ la ley del movimiento Browniano $(B_t)_{t \in [0,1]}$ y $\P^{(c)}$ la ley del movimiento Browniano con drift $(B_t + ct)_{t \in [0,1]}$. Entonces se tiene la absoluta continuidad entre ellas
+\[\P^{(c)} \ll \P \ll \P^{(c)}\]
+Con derivada de Radon-Nikodým dada por
+\[\dv{\P^{(c)}}{\P}\qty((B_t)_{t \in [0,1]}) = \exp(cB_1 - \frac{c^2}{2})\]
+}
 
 \section{Propiedad de Markov}
 
 \teorema{Propiedad de Markov Débil}{Sea }
 
-\definicion{Filtración}{lal}
+\definicion{Filtración y filtraciones límite}{Una filtración $(\F_t)_{t \geq 0}$ es una familia creciente de $\sigma$-álgebras. Definimos además las $\sigma$-álgebras límite
+\[\F_\infty = \sigma\qty(\bigcup_{t \geq 0} \F_t), \qquad \F_t^+ = \bigcap_{\epsilon >0 } F_{t + \epsilon}\]}
 
-\definicion{Filtración casi natural del MB}{lal}
+\definicion{Filtración casi natural del MB}{Se define mediante $\F_t = \sigma(B_s : s \in [0,t])$}
 
-\teorema{Ley 0-1 de Blumenthal}{lal}
+\teorema{Ley 0-1 de Blumenthal}{La $\sigma$-álgebra $\F_0^+$, en que $(\F_t)_t$ es la filtración casi natural del MB, es trivial. Es decir $\P(A) \in \{0, 1\}$ para $A$ en esta $\sigma$-álgebra.}
 
-\definicion{Filtración natural del MB}{lal}
+\definicion{Filtración natural del MB}{La filtración natural del movimiento Browniano es la completación con respecto a $\P$ de la filtración casi natural.}
 
 \definicion{Continuidad a la derecha}{
+Una filtración $(\F_t)_t$ se dice continua a la derecha cuando para todo $t$, se tiene $\F_t = \F_t^+$.
 
-\textbf{Nota:} La filtración natural del MB es continua a la derecha.
+\noindent\textbf{Nota:} La filtración natural del MB es continua a la derecha.
 }
 
-\definicion{Adaptabilidad}{lal}
+\definicion{Adaptabilidad}{Un proceso $(X_t)_t$ se dice adaptado a la filtración $(\F_t)_t$ cuando $\forall t \geq 0: X_t$ es $\F_t$-medible.}
 
-\definicion{Tiempo de parada}{lal}
+\definicion{Tiempo de parada}{Un tiempo aleatorio $\tau: \Omega \to \R^+$ se dice tiempo de parada con respecto a la filtración $(\F_t)_t}$ cuando $\{\tau \leq t\} \in \F_t$.
 
-\proposicion{Tiempo de llegada a un conjunto}{lal}
+\proposicion{Tiempo de llegada a un conjunto}{
+Sea $(X_t)_{t \geq 0}$ un proceso en $\R^d$ c.s. continuo y adaptado a $(\F_t)_t$ filtración continua por la derecha. Definimos, para $A \subseteq \R^d$,
+\[\tau_A = \inf\{t \geq 0 : X_t \in A\}\]
+Si $A$ es abierto o cerrado, se tiene entonces que $\tau_A$ es tiempo de parada.
+}
 
-\definicion{$\F_\tau$}{lal}
+\definicion{$\F_\tau$}{Para $\tau$ un tiempo de parada, definimos
+\begin{align*}
+    \F_\tau &= \{\Theta \in \F_\infty : \forall t \geq 0, \Theta \cap \{\tau \leq t\} \in \F_t\}\\
+    \F_{\tau^+} &= \{\Theta \in \F_\infty : \forall t > 0, \Theta \cap \{\tau < t\} \in \F_t\}
+\end{align*}}
 
 \teorema{Propiedad de Markov Fuerte}{lal}
 
