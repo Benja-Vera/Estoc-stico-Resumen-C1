@@ -96,9 +96,15 @@ Dada $(X_t)_{t \in D}$ familia de $\mathcal{N}(0, 1)$ independientes:
 \[\phi(h) = \sqrt{2} \sqrt{h \log(1/h)}\]}
 \proposicion{Monotonía y derivabilidad}{c.s. el movimiento browniano no es monótono en ningún intervalo ni derivable en ningún punto}
 
-\proposicion{Ceros del MB}{lal}
+\proposicion{Ceros del MB}{
+El conjunto $C = B^{-1}(\{0\})$ de ceros del MB es un conjunto cerrado sin puntos aislados, con medida de Lebesgue nula y que no contiene intervalos.
+}
 
-\proposicion{Máximos del MB}{lal}
+\proposicion{Máximos del MB}{
+Definamos
+\[M_\text{loc} = \{t \in [0, 1] : t \text{ es máximo local de } B\}\]
+Entonces, $M_\text{loc}$ es un conjunto numerable denso en $[0, 1]$ en que todos los puntos de él tienen \textit{valor} máximo local diferente entre sí.
+}
 
 \proposicion{Absoluta continuidad}{
 Sea $\P$ la ley del movimiento Browniano $(B_t)_{t \in [0,1]}$ y $\P^{(c)}$ la ley del movimiento Browniano con drift $(B_t + ct)_{t \in [0,1]}$. Entonces se tiene la absoluta continuidad entre ellas
@@ -109,7 +115,8 @@ Con derivada de Radon-Nikodým dada por
 
 \section{Propiedad de Markov}
 
-\teorema{Propiedad de Markov Débil}{Sea }
+\teorema{Propiedad de Markov Débil}{Sea $(B_t)_{t \geq 0}$ un movimiento Browniano y $s \in \R^+$. Entonces el proceso $(B_{t + s} - B_s)_{t \geq 0}$ es un MB indepenediente de $(B_t)_{t \in [0, s]}$.
+}
 
 \definicion{Filtración y filtraciones límite}{Una filtración $(\F_t)_{t \geq 0}$ es una familia creciente de $\sigma$-álgebras. Definimos además las $\sigma$-álgebras límite
 \[\F_\infty = \sigma\qty(\bigcup_{t \geq 0} \F_t), \qquad \F_t^+ = \bigcap_{\epsilon >0 } F_{t + \epsilon}\]}
@@ -142,11 +149,20 @@ Si $A$ es abierto o cerrado, se tiene entonces que $\tau_A$ es tiempo de parada.
     \F_{\tau^+} &= \{\Theta \in \F_\infty : \forall t > 0, \Theta \cap \{\tau < t\} \in \F_t\}
 \end{align*}}
 
-\teorema{Propiedad de Markov Fuerte}{lal}
+\teorema{Propiedad de Markov Fuerte}{
+Para todo $\tau$ tiempo de parada c.s. finito, el proceso $(B_{\tau + t} - B_\tau)_{t \geq 0}$ es MB independiente de $\F_\tau$.
+}
 
-\teorema{Principio de Reflexión}{lal}
+\teorema{Principio de Reflexión}{
+Sea $(B_t)_{t \geq 0}$ un MB y $\tau$ un tiempo de parada. Entonces, el proceso reflejado en $\tau$ $(B_t^*)_{t \geq 0}$ definido por
+\[B_t^* = B_t \mathbf{1}_{t \leq \tau} + (2B_\tau - B_t)\mathbf{1}_{t > \tau}\]
+Tiene la ley de un MB.
+}
 
-\teorema{Transformada de Lévy}{lal}
+\teorema{Transformada de Lévy}{
+Sea $(B_t)_{t \geq 0}$ un MB. Entonces
+\[(|B_t|)_{t \geq 0} \overset{\L}{=} \qty(B_t - \inf_{s \in [0, t]} B_s)_{t \geq 0}\]
+}
 
 \section{Dimensiones Fractales}
 \end{multicols}
