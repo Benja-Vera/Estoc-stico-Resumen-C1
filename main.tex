@@ -18,9 +18,9 @@ Sea $\{A_n\}_{n \in \N}$ colección de conjuntos. Definimos:
 \lema{Borel-Cantelli}{Sea $\{A_n\}_{n \in \N}$ colección de eventos del espacio de probabilidad $(\Omega, \F, \P)$. Entonces
 \begin{itemize}
     \item \textbf{(convergente)}
-    \[\sum_{n \in \N} \P(A_n) < \infty \implies \P(\limsup_n A_n) = 0\]
+    \[\sum_{n \in \N} \P(A_n) < \infty \implies \P\qty(\limsup_n A_n) = 0\]
     \item \textbf{(divergente)} Si además los $\{A_n\}_n$ son independientes:
-    \[\sum_{n \in \N} \P(A_n) = \infty \implies \P(\limsup_n A_n) = 1\]
+    \[\sum_{n \in \N} \P(A_n) = \infty \implies \P\qty(\limsup_n A_n) = 1\]
 \end{itemize}
 }
 
@@ -76,8 +76,8 @@ Dada $(X_t)_{t \in D}$ familia de $\mathcal{N}(0, 1)$ independientes:
 
     \item \textbf{(Construcción en $[0, 1]$)} Definimos $F_0(t) = X_1 \cdot t$ y
     \[F_n(t) = \begin{cases}
-        2^{-\frac{n+1}{2}} x_t, & t \in D_n \setminus D_{n-1} \\
-        0, & t \in D_{n-1}\\
+        2^{-\frac{n+1}{2}} x_t & t \in D_n \setminus D_{n-1} \\
+        0 & t \in D_{n-1}\\
         \text{lineal entre los valores}. &
     \end{cases}\]
     Así, $B_t = \sum_{k \geq 0} F_k(t)$ coincide con la construcción en $D$ y define un MB en $[0, 1]$.
@@ -165,6 +165,61 @@ Sea $(B_t)_{t \geq 0}$ un MB. Entonces
 }
 
 \section{Dimensiones Fractales}
+
+\definicion{Dimensión de Minkowski}{
+Para $(X, d)$ un espacio métrico acotado, definimos
+\[N(X, \epsilon) = \inf\qty{n \in \N : \exists (x_i)_{i=1}^n, X \subseteq \bigcup_{i=1}^n B(x_i, \epsilon)}\]
+Y con esto se definen la dimensión superior e inferior de Minkowski
+\begin{align*}
+    \overline{\dim}_M(X) &= \limsup_{\epsilon \to 0} \frac{\log(N(X, \epsilon))}{\log(1/\epsilon)}\\
+    \underline{\dim}_M(X) &= \liminf_{\epsilon \to 0} \frac{\log(N(X, \epsilon))}{\log(1/\epsilon)}
+\end{align*}
+Y la dimensión de Minkowski es el valor común cuando ambos coinciden.
+}
+
+\proposicion{Caracterización diádica}{
+Sea $X \subseteq \R^d$ compacto y
+\[\square_n = \qty{q + [0, 2^{-n}]^d : q \in 2^{-n}\Z}\]
+Así, si $\tilde{N}(X) := |\{c \in \square_n : c \cap X \neq \emptyset\}|$. Entonces
+\begin{align*}
+    \overline{\dim}_M(X) &= \limsup_{n \to \infty} \frac{\log(\tilde{N}(X))}{\log(2^n)}\\
+    \underline{\dim}_M(X) &= \liminf_{n \to \infty} \frac{\log(\tilde{N}(X))}{\log(2^n)}
+\end{align*}
+}
+
+\definicion{Medida de Hausdorff}{
+La medida $\alpha$-Hausdorff se define por
+\begin{align*}
+    \mu_H^{\alpha , \epsilon}(X) &= \inf\qty{\sum_{n \in \N} \rho_i^\alpha: \exists (x_i)_{i \in \N}, \bigcup_{i \in \N} B(x_i, \rho_i) = X , \rho_i \leq \epsilon}\\
+    \mu_H^\alpha (X) &= \lim_{\epsilon \to 0} \mu_H^{\alpha, \epsilon}(X)
+\end{align*}
+Se tiene además que si $\mu_H^{\alpha}<\infty$ entonces, para todo $\beta >\alpha$, se tiene $\mu_H^{\beta}(X) = 0$ y si $\mu_H^{\alpha}>0$, entonces para todo $\beta<\alpha$ se tiene $\mu_H^{\beta}(X) = \infty$.
+}
+
+\definicion{Dimensión de Hausdorff}{
+\[\dim_H(X) = \inf\qty{\alpha \geq 0 : \mu_H^\alpha(X) = 0} = \sup\qty{\alpha \geq 0 : \mu_H^\alpha(X) = \infty}\]
+Se tiene que $\dim_H(X) \leq \underline{\dim}_M(X)$.
+}
+
+\proposicion{Cotas para grafo e imagen}{Sea $f:[0,1]\to \R^d$ una función $\alpha$-Hölder. Entonces
+\begin{enumerate}
+    \item Si $A\subset [0,1]$, $\dim_{M/H}(f(A)) \leq \frac{1}{\alpha}\dim_{M/H}(A)$
+    \item $\dim_{M/H}(G(f)) \leq \frac{1}{\alpha} \wedge (1+d-d\alpha)$
+\end{enumerate}}
+
+\proposicion{Ceros}{Para el MB lineal, c.s. $\dim_{M/H}(B^{-1}(\{0\})) =\frac12$.}
+
+\lema{Método de la energía}{Sea $E\subseteq \R^d$ un conjunto. Supongamos que existe una medida $\nu$ tal que \[\iint_{E\times E} \frac{\nu(dx)\nu(dy)}{\|x-y\|^{\alpha}} < \infty\]
+y $\nu(E) > 0$. Entonces $\dim_H(E) \geq \alpha$.}
+
+\proposicion{Grafo e imagen}{Casi seguramente:
+\[\dim_{M/H}(G(B)) = \begin{cases}
+    \frac32 &\text{si }d=1\\
+    2 & \text{si }d\geq 2
+\end{cases}\]
+\[\dim_{M/H}(B([0,1])) = 2 \wedge d}\]
+
+
 \end{multicols}
 
 \end{document}
