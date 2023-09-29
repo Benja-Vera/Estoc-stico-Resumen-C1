@@ -8,6 +8,10 @@
 \begin{multicols}{2}
 \setcounter{section}{-1}
 \section{Preliminares}
+\proposicion{Cota para la distribución normal}{Si $X \sim \mathcal{N}(0, 1)$ y $t \geq 1$, entonces
+\[\P(X > t) \leq \frac{1}{\sqrt{2\pi}t} e^{-t^2/2}\]}
+\proposicion{Máximo de normales}{Sea $(X_n)_{n\in\N}$ sucesión iid $\mathcal{N}(0,1)$, entonces c.s. para todo $c> \sqrt{2}$, existe $n_0 \in \N$ tal que a partir de $n_0$:
+\[\max_{k\in [1..n]} X_k \leq c\sqrt{\log(n)}\]}
 \definicion{Limsup y liminf de conjuntos}{
 Sea $\{A_n\}_{n \in \N}$ colección de conjuntos. Definimos:
 \begin{itemize}
@@ -140,7 +144,7 @@ Una filtración $(\F_t)_t$ se dice continua a la derecha cuando para todo $t$, s
 \proposicion{Tiempo de llegada a un conjunto}{
 Sea $(X_t)_{t \geq 0}$ un proceso en $\R^d$ c.s. continuo y adaptado a $(\F_t)_t$ filtración continua por la derecha. Definimos, para $A \subseteq \R^d$,
 \[\tau_A = \inf\{t \geq 0 : X_t \in A\}\]
-Si $A$ es abierto o cerrado, se tiene entonces que $\tau_A$ es tiempo de parada.
+Si $A$ es abierto o cerrado, $\tau_A$ es tiempo de parada.
 }
 
 \definicion{$\F_\tau$}{Para $\tau$ un tiempo de parada, definimos
